@@ -216,3 +216,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Bloqueio de Imagens de Satélite e Shapefiles (Evita travar o GitHub)
+data/
+*.tif
+*.tiff
+*.shp
+*.shx
+*.dbf
+*.prj
