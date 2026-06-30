@@ -32,14 +32,16 @@ class DataIngestionPipeline:
                 collections=[collection],
                 bbox=bbox,
                 datetime=dt,
-                query={"eo:cloud_cover": {"lt": 10}}
+                query={"eo:cloud_cover": {"lt": 15}}
             )
-            items = list(search.item_collection())
+            items = list(search.items())
             
             if not items:
                 logger.warning(f"[STAC] Nenhuma cena encontrada para BBOX {bbox}")
                 return None
                 
+            # Ordena por menos nuvens
+            items.sort(key=lambda x: x.properties["eo:cloud_cover"])
             return items[0]
             
         except Exception as e:
